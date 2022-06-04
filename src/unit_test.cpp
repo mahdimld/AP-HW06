@@ -9,7 +9,7 @@
 #include "q4.h"
 
 
-TEST(HW6Test, TEST1) {
+/*TEST(HW6Test, TEST1) {
     auto min1 = q1::gradient_descent(0.01, 0.1, cos);
     EXPECT_NEAR(min1, 3.14, 0.1);
 
@@ -39,7 +39,7 @@ TEST(HW6Test, TEST4) {
     auto min = q1::gradient_descent<double, Func>(0.0, 0.01);
     EXPECT_NEAR(min, -1.57, 0.01);
 }
-/*
+*/
 TEST(HW6Test, TEST5) {
     std::vector<q2::Patient> patients = q2::read_file("lung_cancer.csv");
     EXPECT_EQ(patients.size(), 59);
@@ -54,6 +54,8 @@ TEST(HW6Test, TEST5) {
     EXPECT_EQ(patients[58].smokes, 25);
     EXPECT_EQ(patients[58].area_q, 9);
     EXPECT_EQ(patients[58].alkhol, 0);
+
+    
 }
 
 TEST(HW6Test, TEST6) {
@@ -66,6 +68,7 @@ TEST(HW6Test, TEST6) {
     EXPECT_EQ(patients[58].name, "Joan Crawford");
 }
 
+/*
 TEST(HW6Test, TEST7) {
     auto flights = q3::gather_flights("flights.txt");
 
