@@ -5,30 +5,38 @@
 #include <cmath>
 #include <functional>
 
+
+
 namespace q1 {
+
     template<typename T = double, typename F = std::function<T(T)>>
-    inline T gradient_descent(T init_val, T step_size, F objectFnc = F()) {
-        int maxIterations{500};
-        T gradientThresh{step_size / 100};
-        int iterCount{0};
-        T gradientMagnitude = 1.0;
-        T currentPoint{init_val};
-        T nextPoint{currentPoint + step_size};
-        int direction{objectFnc(nextPoint) - objectFnc(currentPoint) < 0 ? 1 : -1};
-        while ((iterCount < maxIterations) && (gradientMagnitude > gradientThresh)) {
-            nextPoint = currentPoint + direction * step_size;
-            T funcVal1{objectFnc(currentPoint)};
-            T funcVal2 = objectFnc(nextPoint);
-            T gradient{(funcVal2 - funcVal1) / step_size};
-            gradientMagnitude = pow(gradient, 2);
-            currentPoint = nextPoint;
-            iterCount++;
+    inline T gradient_descent(T initial_value, T step_size, F gradient_func = F()) {
+        T limit{step_size / 50};
+        size_t Max_lim{1000};
+        size_t Counter{0};
+        T slope{1.0};
+        T currentP{initial_value};
+        T nextP{currentP + step_size};
+        int dir{0};
+        if(gradient_func(nextP) - gradient_func(currentP) < 0){
+            dir = 1;
         }
-        return nextPoint;
+        else{
+            dir = -1;
+        }
+        while ((Counter < Max_lim) && (slope > limit)) {
+            nextP = currentP + dir * step_size;
+            T currentOut{gradient_func(currentP)};
+            T nextOut = gradient_func(nextP);
+            T gradient{(currentOut - nextOut) / step_size};
+            slope = pow(gradient, 2);
+            currentP = nextP;
+            Counter++;
+        }
+
+        return currentP;
     }
 
-
 }
-
 
 #endif //Q1_H
